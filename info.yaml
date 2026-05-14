@@ -20,10 +20,12 @@ project:
   language:     "Verilog"
   clock_hz:     50000000
 
-  # Max is a stretch SKU — request 2x2 tiles to keep DRC + WNS comfortably
-  # green at SKY130A 60% density. Fallback footprint 1x2 listed in
-  # docs/architecture/MAX_FOOTPRINT.md if 2x2 fails closure.
-  tiles:        "2x2"
+  # Max is a stretch SKU — eight GF16 tiles need substantial silicon.
+  # First attempt at 2x2 TT tiles produced GPL-0301 utilization 287.8 %.
+  # Upgrading to 4x4 TT tiles for ~4x more area, expected utilization ~72 %.
+  # If 4x4 still over-utilises, drop one cluster (lane[3]=0 branch) and
+  # rerun at 3x2 — documented in docs/architecture/MAX_FOOTPRINT.md.
+  tiles:        "4x4"
 
   top_module:   "tt_um_trinity_max"
 
