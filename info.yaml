@@ -1,0 +1,64 @@
+# TinyTapeout info.yaml — TRI-1 Max
+# https://tinytapeout.com/specs/info_yaml/
+yaml_version: 6
+
+project:
+  title:        "TRI-1 Max — Dual-cluster Trinity GF16 mesh (8 tiles)"
+  author:       "Dmitrii Vasilev"
+  discord:      "ghashtag"
+  description:  >
+    Largest SKU of the TRI-1 Triad (Nano / Mid / Max). Eight GF16(2^4)
+    ternary MAC tiles arranged as two 2x2 cluster meshes behind a
+    supervisor router; lane[3] of the Trinity packet selects the cluster
+    while the 2-bit dst field routes to the right tile inside it. On
+    reset the chip drives the canonical dot4(1.0, 2.0, 3.0, 4.0) = 0x47C0
+    on {uio_out, uo_out} — identical to Nano (tt-trinity-nano) and Mid
+    (tt-trinity-gf16). That equality is the cross-die anchor of
+    TG-TRIAD-X (PhD Theorem 36.1, docs/phd/chapters/flos_70.tex).
+    R-SI-1: zero `*` operators in synthesisable RTL.
+    Anchor: phi^2 + phi^-2 = 3. DOI: 10.5281/zenodo.19227877.
+  language:     "Verilog"
+  clock_hz:     50000000
+
+  # Max is a stretch SKU — request 2x2 tiles to keep DRC + WNS comfortably
+  # green at SKY130A 60% density. Fallback footprint 1x2 listed in
+  # docs/architecture/MAX_FOOTPRINT.md if 2x2 fails closure.
+  tiles:        "2x2"
+
+  top_module:   "tt_um_trinity_max"
+
+  source_files:
+    - "src/gf16_add.v"
+    - "src/gf16_mul.v"
+    - "src/gf16_dot4.v"
+    - "src/trinity_gf16_tile.v"
+    - "src/trinity_router_2x2.v"
+    - "src/trinity_mesh_2x2.v"
+    - "src/trinity_dual_cluster.v"
+    - "src/tt_um_trinity_max.v"
+
+pinout:
+  ui[0]: "load_mode (0=canonical default, 1=packet path)"
+  ui[1]: "eject_beat[0]"
+  ui[2]: "eject_beat[1]"
+  ui[3]: "eject_ready"
+  ui[4]: "commit_strobe (rising edge -> issue assembled packet)"
+  ui[5]: "in_beat[0]"
+  ui[6]: "in_beat[1]"
+  ui[7]: "byte_valid (latch uio_in into selected in_beat)"
+  uo[0]: "result[0] (canonical 0x47C0 default; eject byte in load_mode)"
+  uo[1]: "result[1]"
+  uo[2]: "result[2]"
+  uo[3]: "result[3]"
+  uo[4]: "result[4]"
+  uo[5]: "result[5]"
+  uo[6]: "result[6]"
+  uo[7]: "result[7]"
+  uio[0]: "result[8]"
+  uio[1]: "result[9]"
+  uio[2]: "result[10]"
+  uio[3]: "result[11]"
+  uio[4]: "result[12]"
+  uio[5]: "result[13]"
+  uio[6]: "result[14]"
+  uio[7]: "result[15]"
