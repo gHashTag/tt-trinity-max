@@ -1,3 +1,14 @@
+> ## ℹ️ Status: TTSKY27a backup SKU — NOT in TTSKY26b TRIP FIRE
+>
+> This repository was **not selected** for the **TTSKY26b** Trinity TRI-NET triplet. It remains active as a **TTSKY27a backup SKU** (dual-cluster 4×4 "SOMA" / Catalan slot).
+>
+> The active TTSKY26b TRIP FIRE triad uses three sacred-constant neurons:
+>
+> - **φ-anchor** → [tt-trinity-phi](https://github.com/gHashTag/tt-trinity-phi) (1×1 Lucas POST, was tt-trinity-nano)
+> - **e-engine** → [tt-trinity-euler](https://github.com/gHashTag/tt-trinity-euler) (8×2 SUPER-CROWN)
+> - **γ-surface** → [tt-trinity-gamma](https://github.com/gHashTag/tt-trinity-gamma) (8×4 mesh, was tt-trinity-max-true)
+
+
 # TRI-1 Max — Dual-cluster Trinity GF16 mesh (8 tiles)
 
 > 🌳 Trinity role: **BRANCH-SILICON** — TTSKY26b shuttle SKU 3 of 3 (stretch).
